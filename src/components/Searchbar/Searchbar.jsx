@@ -3,22 +3,17 @@ import { ReactComponent as Search } from '../../image/search.svg';
 
 import css from './Searchbar.module.css';
 
-export const Searchbar = () => {
+export const Searchbar = ({submit}) => {
     return (
         <header className={css.searchbar}>
-            <form className={css.form}>
+            <form onSubmit={submit} className={css.form}>
                 <button type="submit" className={css.button}>
+                    <Search className={css['button-icon']} />
                 </button>
-                    <img
-                        className={css['button-label']}
-                        src="../image/search.svg"
-                        alt=""
-                        // width={20}
-                    />
-                    <Search className={css['button-label']} width={20}/>
                 <input
                     className={css.input}
                     type="text"
+                    name='query'
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos"
