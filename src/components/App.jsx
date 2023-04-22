@@ -83,7 +83,7 @@ export class App extends Component {
         <Searchbar submit={this.handleOnSubmit} />
         {this.state.images && <ImageGallery images={this.state.images} onClick={this.handleOpenModal} />}
         <Loader isLoading={this.state.isLoading} />
-        {(this.state.images.length !== 0) && <Button loadMore={this.handleLoadMore} isLoading={this.state.isLoading} />}
+        {(this.state.images.length !== 0) && <Button loadMore={this.handleLoadMore} />}
         <ModalComponent
           showModal={this.state.showModal}
           onRequestClose={this.handleCloseModal}
