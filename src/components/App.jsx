@@ -1,13 +1,11 @@
 import { Component } from "react";
-import { RotatingLines } from 'react-loader-spinner';
-
-import css from './App.module.css'
 
 import fetchImage from '../api/fetchImage';
 
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
+import { Loader } from "./Loader/Loader";
 import { ModalComponent } from "./Modal/Modal";
 
 export class App extends Component {
@@ -31,7 +29,7 @@ export class App extends Component {
           top: window.innerHeight,
           behavior: "smooth",
         });
-      }, 700);
+      }, 1000);
     };
   };
 
@@ -49,7 +47,7 @@ export class App extends Component {
     });
   };
 
-  loadMoreImages = async () => {
+  handleLoadMore = async () => {
     this.setState({ isLoading: true });
     const { data: { hits } } = await fetchImage(this.state.query, this.state.page);
 
@@ -84,16 +82,8 @@ export class App extends Component {
       <>
         <Searchbar submit={this.handleOnSubmit} />
         {this.state.images && <ImageGallery images={this.state.images} onClick={this.handleOpenModal} />}
-        <div className={css.spiner}>
-          <RotatingLines
-              strokeColor="grey"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="30"
-              visible={this.state.isLoading}
-          />
-        </div>
-        {(this.state.images.length !== 0) && <Button loadMore={this.loadMoreImages} isLoading={this.state.isLoading} />}
+        <Loader isLoading={this.state.isLoading} />
+        {(this.state.images.length !== 0) && <Button loadMore={this.handleLoadMore} isLoading={this.state.isLoading} />}
         <ModalComponent
           showModal={this.state.showModal}
           onRequestClose={this.handleCloseModal}
