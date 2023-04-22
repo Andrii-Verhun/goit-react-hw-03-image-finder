@@ -37,18 +37,18 @@ export class App extends Component {
     evt.preventDefault();
     const { query } = evt.target;
     this.setState({ isLoading: true });
-    const { data } = await fetchImage(query.value).then((data) => {
-      return data;
-    }).catch((error) => {
+    try {
+      const { data } = await fetchImage(query.value)
+      this.setState({
+        query: query.value,
+        images: data.hits,
+        totalHits: data.totalHits,
+        page: 2,
+        isLoading: false,
+      });
+    } catch (error) {
       console.log(error);
-    });
-    this.setState({
-      query: query.value,
-      images: data.hits,
-      totalHits: data.totalHits,
-      page: 2,
-      isLoading: false,
-    });
+    }
   };
 
   handleLoadMore = async () => {
