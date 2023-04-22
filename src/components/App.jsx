@@ -37,8 +37,7 @@ export class App extends Component {
     evt.preventDefault();
     const { query } = evt.target;
     this.setState({ isLoading: true });
-    const { data } = await fetchImage(query.value);
-    console.log(data);
+    const { data } = await fetchImage(query.value).then((data) => data).catch((error) => error);
     this.setState({
       query: query.value,
       images: data.hits,
