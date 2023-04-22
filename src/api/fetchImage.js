@@ -1,12 +1,13 @@
 import customAxios from './config';
 
-const fetchImage = (query, page = 1) => {
-    return customAxios('/api', {
+const fetchImage = async (query, page = 1) => {
+    return await customAxios('/api', {
         params: {
             q: query,
             page
         },
-    }).then((data) => data).catch((error) => error);
+    }).then((data) => console.log(data))
+        .catch((error) => console.log(error));
 };
 
 export default fetchImage;
