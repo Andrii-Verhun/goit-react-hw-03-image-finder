@@ -35,9 +35,10 @@ export class App extends Component {
 
   handleOnSubmit = async (evt) => {
     evt.preventDefault();
-    const { query } = evt.target
+    const { query } = evt.target;
     this.setState({ isLoading: true });
-    const { data } = await fetchImage(query.value)
+    const { data } = await fetchImage(query.value);
+    console.log(data);
     this.setState({
       query: query.value,
       images: data.hits,
