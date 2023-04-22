@@ -37,11 +37,11 @@ export class App extends Component {
     evt.preventDefault();
     const { query } = evt.target
     this.setState({ isLoading: true });
-    const { data: { hits, totalHits } } = await fetchImage(query.value)
+    const { data } = await fetchImage(query.value)
     this.setState({
       query: query.value,
-      images: hits,
-      totalHits,
+      images: data.hits,
+      totalHits: data.totalHits,
       page: 2,
       isLoading: false,
     });
