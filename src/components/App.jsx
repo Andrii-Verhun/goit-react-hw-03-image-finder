@@ -39,7 +39,7 @@ export class App extends Component {
       };
     };
 
-    if (prevState.page !== page) {
+    if ((prevState.page !== page) && (prevState.query === query)) {
       try {
         const { data: { hits } } = await fetchImage(query, page);
         this.setState((state) => {
